@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-source <(curl -s https://raw.githubusercontent.com/nicholaswilde/proxmox-helper-scripts/refs/heads/main/misc/build.func)
+
+source <(curl -s https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT
@@ -8,21 +9,20 @@ source <(curl -s https://raw.githubusercontent.com/nicholaswilde/proxmox-helper-
 function header_info {
 clear
 cat <<"EOF"
-    ___          __     ______           __                 _   ________
-   /   |  ____  / /_   / ____/___ ______/ /_  ___  _____   / | / / ____/
-  / /| | / __ \/ __/__/ /   / __ `/ ___/ __ \/ _ \/ ___/__/  |/ / / __
- / ___ |/ /_/ / /_/__/ /___/ /_/ / /__/ / / /  __/ /  /__/ /|  / /_/ /
-/_/  |_/ .___/\__/   \____/\__,_/\___/_/ /_/\___/_/     /_/ |_/\____/
-      /_/
-
+    ____                                          ____             __                  _____
+   / __ \_________  _  ______ ___  ____  _  __   / __ )____ ______/ /____  ______     / ___/___  ______   _____  _____
+  / /_/ / ___/ __ \| |/_/ __ `__ \/ __ \| |/_/  / __  / __ `/ ___/ //_/ / / / __ \    \__ \/ _ \/ ___/ | / / _ \/ ___/
+ / ____/ /  / /_/ />  </ / / / / / /_/ />  <   / /_/ / /_/ / /__/ ,< / /_/ / /_/ /   ___/ /  __/ /   | |/ /  __/ /
+/_/   /_/   \____/_/|_/_/ /_/ /_/\____/_/|_|  /_____/\__,_/\___/_/|_|\__,_/ .___/   /____/\___/_/    |___/\___/_/
+                                                                         /_/
 EOF
 }
 header_info
 echo -e "Loading..."
-APP="Apt-Cacher-NG"
-var_disk="2"
-var_cpu="1"
-var_ram="512"
+APP="PBS"
+var_disk="10"
+var_cpu="2"
+var_ram="2048"
 var_os="debian"
 var_version="12"
 variables
@@ -42,13 +42,13 @@ function default_settings() {
   GATE=""
   APT_CACHER=""
   APT_CACHER_IP=""
-  DISABLEIP6="yes"
+  DISABLEIP6="no"
   MTU=""
   SD=""
   NS=""
   MAC=""
   VLAN=""
-  SSH="yes"
+  SSH="no"
   VERB="no"
   echo_default
 }
@@ -70,5 +70,5 @@ build_container
 description
 
 msg_ok "Completed Successfully!\n"
-echo -e "${APP} maintenance page should be reachable by going to the following URL.
-         ${BL}http://${IP}:3142/acng-report.html${CL} \n"
+echo -e "${APP} should be reachable by going to the following URL.
+         ${BL}http://${IP}:8007${CL} \n"
